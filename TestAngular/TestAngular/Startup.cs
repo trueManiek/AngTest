@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TestAngular.Models.Database;
 
 namespace TestAngular
 {
@@ -23,6 +25,8 @@ namespace TestAngular
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            var dbConnectionString = "Data Source=.;Initial Catalog=WypoEntity;Integrated Security=SSPI;";
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
